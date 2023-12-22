@@ -7,7 +7,7 @@ For security purposes, the machine does not expose port 22 but only the 80 from 
 
 ## infrastructure provisionig
 
-To provision the infrastructure, you need to create an S3 bucket and a DynamoDB table, which will contain the Terraform state:
+To provision the infrastructure, you need to create an S3 bucket and a DynamoDB table, which will contain the Terraform state (the region selected is the eu-central-1):
 
 **bucket name**: *vmex-prod-terraform-state*
 
@@ -25,7 +25,7 @@ terraform apply
 After creating the infrastructure, you have to build and push the Docker image, which is used by the VM:
 ```
 docker build . -t <ecr_repo_url>
-aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin <ecr_repo_url>
+aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin <ecr_repo_url>
 docker push <ecr_repo_url>
 ```
 
